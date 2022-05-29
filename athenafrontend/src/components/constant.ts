@@ -154,5 +154,7 @@ export interface Values {
   role: string;
   patch: string;
   mode: string;
+  queueType: string;
+  rank: string;
 }
 

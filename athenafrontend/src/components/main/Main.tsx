@@ -44,6 +44,8 @@ export default function Main() {
       role: role,
       patch: patch,
       mode: mode,
+      queue_type: queueType,
+      rank: rank,
     }),
   };
 
@@ -55,12 +57,14 @@ export default function Main() {
       })}
       <Formik
         initialValues={{
-          fields: "",
+          fields: "Damage Player",
           items: "",
           enemy: "",
-          role: "",
-          patch: "",
-          mode: "",
+          role: "Solo",
+          patch: "9.5",
+          mode: "Conquest",
+          queueType: "Ranked",
+          rank: "All Ranks",
         }}
         onSubmit={(values: Values) => {
           console.log(values);
@@ -70,6 +74,8 @@ export default function Main() {
           setRole([...values.role.split(",")]);
           setPatch([...values.patch.split(",")]);
           setMode([...values.mode.split(",")]);
+          setQueueType([...values.queueType.split(",")]);
+          setRank([...values.rank.split(",")]);
           console.log(requestOptions);
           fetch("/api/generatereport", requestOptions).then((res) =>
             res.json().then((data) => {
@@ -80,27 +86,47 @@ export default function Main() {
       >
         <Form>
           <div className="row">
-            <label htmlFor="fields">Fields</label>
-            <Field id="fields" name="fields" placeholder="Damage Player" />
-
-            <label htmlFor="items">Items to Include</label>
-            <Field id="items" name="items" placeholder="Glad Shield" />
+            <div className="column">
+              <label htmlFor="fields">Fields</label>
+              <Field id="fields" name="fields" placeholder="Damage Player" />
+            </div>
+            <div className="column">
+              <label htmlFor="items">Items to Include</label>
+              <Field id="items" name="items" placeholder="Glad Shield" />
+            </div>
           </div>
 
           <div className="row">
-            <label htmlFor="enemy">Enemies</label>
-            <Field id="enemy" name="enemy" placeholder="Achilles" />
-
-            <label htmlFor="role">Role</label>
-            <Field id="role" name="role" placeholder="All Roles" />
+            <div className="column">
+              <label htmlFor="enemy">Enemies</label>
+              <Field id="enemy" name="enemy" placeholder="Achilles" />
+            </div>
+            <div className="column">
+              <label htmlFor="role">Role</label>
+              <Field id="role" name="role" placeholder="All Roles" />
+            </div>
           </div>
 
           <div className="row">
-            <label htmlFor="patch">Patch</label>
-            <Field id="patch" name="patch" placeholder="9.5" />
+            <div className="column">
+              <label htmlFor="patch">Patch</label>
+              <Field id="patch" name="patch" placeholder="9.5" />
+            </div>
+            <div className="column">
+              <label htmlFor="mode">Mode</label>
+              <Field id="mode" name="mode" placeholder="Conquest" />
+            </div>
+          </div>
 
-            <label htmlFor="mode">Mode</label>
-            <Field id="mode" name="mode" placeholder="Conquest" />
+          <div className="row">
+            <div className="column">
+              <label htmlFor="queueType">Queue Type</label>
+              <Field id="queueType" name="queueType" placeholder="Ranked" />
+            </div>
+            <div className="column">
+              <label htmlFor="rank">Rank</label>
+              <Field id="rank" name="rank" placeholder="All Ranks" />
+            </div>
           </div>
 
           <button type="submit">Submit</button>

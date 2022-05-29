@@ -50,4 +50,10 @@ form > input {
   display: flex;
   flex-direction: row;
   margin: .5rem;
+  justify-content: space-evenly;
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
 }

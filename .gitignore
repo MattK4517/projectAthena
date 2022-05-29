@@ -1,2 +1,4 @@
 PYREZ_LOG_FILE.log
 keys
+__pycache__
+filepath.txt

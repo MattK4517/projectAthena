@@ -1,20 +1,20 @@
-import sys
-sys.path.insert(0, "/Users/MayheM/Desktop/python/projectHermes")
-import analyze as anlz
-from __init__ import client
-
-import pandas as pd
-import gspread
 import df2gspread as d2g
+import gspread
+import pandas as pd
+# from main import client
+# import analyze as anlz
+# import sys
+# sys.path.insert(1, "/Users/MayheM/Desktop/python/projectHermes")
 
 
-
-gc = gspread.service_account(filename="/Users/MayheM/Desktop/python/projectAthena/keys/projectathena-343902-f19085d61fdd.json")
+with open("filepath.txt", "r") as f:
+    filepath = f.readline()
+print(filepath)
+gc = gspread.service_account(filename=filepath)
 
 sh = gc.open("test sheet")
 
 print(sh.sheet1.get('A1'))
-
 
 
 # application
